@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import javax.swing.JButton;
 
@@ -9,7 +8,7 @@ public class Peca extends JButton {
 
     public Peca() {
         super();
-        estado = estado.VAZIO;
+        estado = Estado.VAZIO;
     }
 
     public Estado getEstado() {
