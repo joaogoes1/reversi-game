@@ -68,27 +68,35 @@ public class Tabuleiro extends JFrame implements ActionListener {
         */
         boolean jogadaValida = false;
         for (int i = 0; i < 8; i++)
-            if ((pecaAlvo[i][1] == -1) && (pecaAlvo[i][0] == -1))
+            if ((pecaAlvo[i][1] != -1) && (pecaAlvo[i][0] != -1))
                 jogadaValida = true;
         if (!jogadaValida)
             JOptionPane.showMessageDialog(null, "JOGADA NÃO VÁLIDA! ESCOLHA OUTRA PEÇA");
         else {
             if ((pecaAlvo[LINHA_CIMA][0] != -1) && (pecaAlvo[LINHA_CIMA][1] != -1))
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[LINHA_CIMA][0], pecaAlvo[LINHA_CIMA][1], LINHA_CIMA);
+
             if ((pecaAlvo[LINHA_BAIXO][0] != -1) && (pecaAlvo[LINHA_BAIXO][1] != -1))
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[LINHA_BAIXO][0], pecaAlvo[LINHA_BAIXO][1], LINHA_BAIXO);
+
             if ((pecaAlvo[COLUNA_FRENTE][0] != -1) && (pecaAlvo[COLUNA_FRENTE][1] != -1))
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[COLUNA_FRENTE][0], pecaAlvo[COLUNA_FRENTE][1], COLUNA_FRENTE);
+
             if ((pecaAlvo[COLUNA_TRAS][0] != -1) && (pecaAlvo[COLUNA_TRAS][1] != -1))
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[COLUNA_TRAS][0], pecaAlvo[COLUNA_TRAS][1], COLUNA_TRAS);
+
             if ((pecaAlvo[DIAG_PRIM_FRENTE][0] != -1) && (pecaAlvo[DIAG_PRIM_FRENTE][1] != -1))
-                virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_PRIM_FRENTE][0], pecaAlvo[DIAG_PRIM_FRENTE][1], DIAG_SEC_FRENTE);
+                virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_PRIM_FRENTE][0], pecaAlvo[DIAG_PRIM_FRENTE][1], DIAG_PRIM_FRENTE);
+
             if ((pecaAlvo[DIAG_PRIM_TRAS][0] != -1) && (pecaAlvo[DIAG_PRIM_TRAS][1] != -1))
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_PRIM_TRAS][0], pecaAlvo[DIAG_PRIM_TRAS][1], DIAG_PRIM_TRAS);
+
             if ((pecaAlvo[DIAG_SEC_FRENTE][0] != -1) && (pecaAlvo[DIAG_SEC_FRENTE][1] != -1))
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_SEC_FRENTE][0], pecaAlvo[DIAG_SEC_FRENTE][1], DIAG_SEC_FRENTE);
+
             if ((pecaAlvo[DIAG_SEC_TRAS][0] != -1) && (pecaAlvo[DIAG_SEC_TRAS][1] != -1))
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_SEC_TRAS][0], pecaAlvo[DIAG_SEC_TRAS][1], DIAG_SEC_TRAS);
+
             jogadorPreto = !jogadorPreto;
             jogadas++;
         }
@@ -178,9 +186,10 @@ public class Tabuleiro extends JFrame implements ActionListener {
         }
 
         //Inicializa todas as posições em -1, para caso não for um movimento válido
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 2; j++)
-                pecaAlvo[i][j] = -1;
+        for (int i = 0; i < 8; i++) {
+            pecaAlvo[i][0] = -1;
+            pecaAlvo[i][1] = -1;
+        }
 
         //LINHA_CIMA
         //Esse if compara se o estado da peça ao lado é igual ao estado do botão pressionado ou vazio, se for, segue adiante com o código
