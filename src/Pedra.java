@@ -15,13 +15,6 @@ public class Pedra extends Peca{
         setNome(nome);
     }
 
-    public Pedra(int linha, int coluna, String nome, boolean vermelho){
-        super(true);
-        setColuna(coluna);
-        setLinha(linha);
-        setNome(nome);
-    }
-
     public int getLinha() {
         return linha;
     }

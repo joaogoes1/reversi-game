@@ -5,19 +5,12 @@ public class Peca extends JButton {
 
     private static int tamanho = 64;
     private Estado estado;
-    public boolean vermelho;
 
     public Peca() {
         super();
         estado = Estado.VAZIO;
-        this.vermelho = false;
     }
 
-    public Peca(boolean vermelho) {
-        super();
-        estado = Estado.VAZIO;
-        this.vermelho = vermelho;
-    }
     public Estado getEstado() {
         return estado;
     }
@@ -55,13 +48,9 @@ public class Peca extends JButton {
             g2d.fillOval(6, 6, getWidth() - 12, getHeight() - 12);
         }
         // Pintamos a borda da peça independente do estado.
-        if (vermelho){
-            g2d.setColor(Color.RED);
-            g2d.drawOval(6, 6, getWidth() - 12, getHeight() - 12);
-        } else {
-            g2d.setColor(Color.GRAY);
-            g2d.drawOval(6, 6, getWidth() - 12, getHeight() - 12);
-        }
+        g2d.setColor(Color.GRAY);
+        g2d.drawOval(6, 6, getWidth() - 12, getHeight() - 12);
+
     }
 
 }
