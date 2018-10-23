@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,16 +37,21 @@ public class Tabuleiro extends JFrame implements ActionListener {
 
         criarPlacar(placar);
 
-        for (int linha = 0; linha < 8; linha++)
+        for (int linha = 0; linha < 8; linha++) {
             for (int coluna = 0; coluna < 8; coluna++) {
                 String nome = (("btn" + linha) + coluna);
                 tabuleiro[linha][coluna] = new Pedra(linha, coluna, nome);
-                if (conferirCoord(linha, coluna) == 0) tabuleiro[linha][coluna].setEstado(Estado.PRETO);
-                if (conferirCoord(linha, coluna) == 1) tabuleiro[linha][coluna].setEstado(Estado.BRANCO);
+                if (conferirCoord(linha, coluna) == 0) {
+                    tabuleiro[linha][coluna].setEstado(Estado.PRETO);
+                }
+                if (conferirCoord(linha, coluna) == 1) {
+                    tabuleiro[linha][coluna].setEstado(Estado.BRANCO);
+                }
                 tabuleiro[linha][coluna].addActionListener(this);
                 tabuleiro[linha][coluna].setText((linha + "") + coluna);
                 jogo.add(tabuleiro[linha][coluna]);
             }
+        }
 
         pack();
         setVisible(true);
@@ -103,42 +109,53 @@ public class Tabuleiro extends JFrame implements ActionListener {
 
         if (!jogadaValida) {
             JOptionPane.showMessageDialog(null, "JOGADA NÃO VÁLIDA! ESCOLHA OUTRA PEÇA");
-            if (!verificarPossibilidade())
+            if (!verificarPossibilidade()) {
                 acabouJogo();
+            }
         } else {
-            if ((pecaAlvo[LINHA_CIMA][0] != -1) && (pecaAlvo[LINHA_CIMA][1] != -1))
+            if ((pecaAlvo[LINHA_CIMA][0] != -1) && (pecaAlvo[LINHA_CIMA][1] != -1)) {
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[LINHA_CIMA][0], pecaAlvo[LINHA_CIMA][1], LINHA_CIMA);
-            if ((pecaAlvo[LINHA_BAIXO][0] != -1) && (pecaAlvo[LINHA_BAIXO][1] != -1))
+            }
+            if ((pecaAlvo[LINHA_BAIXO][0] != -1) && (pecaAlvo[LINHA_BAIXO][1] != -1)) {
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[LINHA_BAIXO][0], pecaAlvo[LINHA_BAIXO][1], LINHA_BAIXO);
-            if ((pecaAlvo[COLUNA_FRENTE][0] != -1) && (pecaAlvo[COLUNA_FRENTE][1] != -1))
+            }
+            if ((pecaAlvo[COLUNA_FRENTE][0] != -1) && (pecaAlvo[COLUNA_FRENTE][1] != -1)) {
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[COLUNA_FRENTE][0], pecaAlvo[COLUNA_FRENTE][1], COLUNA_FRENTE);
-            if ((pecaAlvo[COLUNA_TRAS][0] != -1) && (pecaAlvo[COLUNA_TRAS][1] != -1))
+            }
+            if ((pecaAlvo[COLUNA_TRAS][0] != -1) && (pecaAlvo[COLUNA_TRAS][1] != -1)) {
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[COLUNA_TRAS][0], pecaAlvo[COLUNA_TRAS][1], COLUNA_TRAS);
-            if ((pecaAlvo[DIAG_PRIM_FRENTE][0] != -1) && (pecaAlvo[DIAG_PRIM_FRENTE][1] != -1))
+            }
+            if ((pecaAlvo[DIAG_PRIM_FRENTE][0] != -1) && (pecaAlvo[DIAG_PRIM_FRENTE][1] != -1)) {
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_PRIM_FRENTE][0], pecaAlvo[DIAG_PRIM_FRENTE][1], DIAG_PRIM_FRENTE);
-            if ((pecaAlvo[DIAG_PRIM_TRAS][0] != -1) && (pecaAlvo[DIAG_PRIM_TRAS][1] != -1))
+            }
+            if ((pecaAlvo[DIAG_PRIM_TRAS][0] != -1) && (pecaAlvo[DIAG_PRIM_TRAS][1] != -1)) {
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_PRIM_TRAS][0], pecaAlvo[DIAG_PRIM_TRAS][1], DIAG_PRIM_TRAS);
-            if ((pecaAlvo[DIAG_SEC_FRENTE][0] != -1) && (pecaAlvo[DIAG_SEC_FRENTE][1] != -1))
+            }
+            if ((pecaAlvo[DIAG_SEC_FRENTE][0] != -1) && (pecaAlvo[DIAG_SEC_FRENTE][1] != -1)) {
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_SEC_FRENTE][0], pecaAlvo[DIAG_SEC_FRENTE][1], DIAG_SEC_FRENTE);
-            if ((pecaAlvo[DIAG_SEC_TRAS][0] != -1) && (pecaAlvo[DIAG_SEC_TRAS][1] != -1))
+            }
+            if ((pecaAlvo[DIAG_SEC_TRAS][0] != -1) && (pecaAlvo[DIAG_SEC_TRAS][1] != -1)) {
                 virarPecas(botao.getLinha(), botao.getColuna(), pecaAlvo[DIAG_SEC_TRAS][0], pecaAlvo[DIAG_SEC_TRAS][1], DIAG_SEC_TRAS);
+            }
 
             jogadorPreto = !jogadorPreto;
-            if (jogadorPreto)
+            if (jogadorPreto) {
                 vez.setText("PRETO");
-            else
+            } else {
                 vez.setText("BRANCO");
+            }
         }
-
 
         // Verificar se todas as peças do tabuleiro estão preenchidas
         // Se estiver completo, chama o método acabou o jogo
-        for (int l = 0; l < 8; l++)
-            for (int c = 0; c < 8; c++)
-                if (tabuleiro[l][c].getEstado() == Estado.VAZIO)
-                    break;
-                else
-                    acabouJogo();
+        for (int l = 0; l < 8; l++) {
+            for (int c = 0; c < 8; c++) {
+                if (tabuleiro[l][c].getEstado() == Estado.VAZIO) {
+                    return;
+                }
+            }
+        }
+        acabouJogo();
     }
 
     private boolean validarJogadas(int[][] pecaAlvo) {
@@ -356,7 +373,9 @@ public class Tabuleiro extends JFrame implements ActionListener {
                     pecaAlvo[DIAG_PRIM_FRENTE][0] = linhaFinal;
                     pecaAlvo[DIAG_PRIM_FRENTE][1] = colunaFinal;
                 }
-                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == jogador) break;
+                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == jogador) {
+                    break;
+                }
                 if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO) {
                     pecaAlvo[DIAG_PRIM_FRENTE][0] = -1;
                     pecaAlvo[DIAG_PRIM_FRENTE][1] = -1;
@@ -376,7 +395,9 @@ public class Tabuleiro extends JFrame implements ActionListener {
                     pecaAlvo[DIAG_PRIM_TRAS][0] = linhaFinal;
                     pecaAlvo[DIAG_PRIM_TRAS][1] = colunaFinal;
                 }
-                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == jogador) break;
+                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == jogador) {
+                    break;
+                }
                 if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO) {
                     pecaAlvo[DIAG_PRIM_TRAS][0] = -1;
                     pecaAlvo[DIAG_PRIM_TRAS][1] = -1;
@@ -396,7 +417,9 @@ public class Tabuleiro extends JFrame implements ActionListener {
                     pecaAlvo[DIAG_SEC_FRENTE][0] = linhaFinal;
                     pecaAlvo[DIAG_SEC_FRENTE][1] = colunaFinal;
                 }
-                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == jogador) break;
+                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == jogador) {
+                    break;
+                }
                 if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO) {
                     pecaAlvo[DIAG_SEC_FRENTE][0] = -1;
                     pecaAlvo[DIAG_SEC_FRENTE][1] = -1;
@@ -407,7 +430,6 @@ public class Tabuleiro extends JFrame implements ActionListener {
             }
         }
 
-
         //DIAG_SEC_TRÁS
         if ((coluna > 1) && (linha < 6)) {
             linhaFinal = linha + 1;
@@ -417,7 +439,9 @@ public class Tabuleiro extends JFrame implements ActionListener {
                     pecaAlvo[DIAG_SEC_TRAS][0] = linhaFinal;
                     pecaAlvo[DIAG_SEC_TRAS][1] = colunaFinal;
                 }
-                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == jogador) break;
+                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == jogador) {
+                    break;
+                }
                 if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO) {
                     pecaAlvo[DIAG_SEC_TRAS][0] = -1;
                     pecaAlvo[DIAG_SEC_TRAS][1] = -1;
@@ -434,82 +458,125 @@ public class Tabuleiro extends JFrame implements ActionListener {
     private boolean verificarPossibilidade() {
         int linhaFinal;
         int colunaFinal;
-        Estado jogadorAtual = null;
-        Estado jogadorAdversario = null;
+        Estado jogadorAtual;
+        Estado jogadorAdversario;
 
         if (jogadorPreto) {
             jogadorAtual = Estado.PRETO;
             jogadorAdversario = Estado.BRANCO;
-        }
-        else {
+        } else {
             jogadorAtual = Estado.BRANCO;
             jogadorAdversario = Estado.PRETO;
         }
 
-        for (int linha = 0; linha < 8; linha++)
-            for (int coluna = 0; coluna < 8; coluna++)
+        for (int linha = 0; linha < 8; linha++) {
+            for (int coluna = 0; coluna < 8; coluna++) {
                 if (tabuleiro[linha][coluna].getEstado() == jogadorAtual) {
 
                     //LINHA_CIMA
-                    if (linha > 1)
-                        if (tabuleiro[linha - 1][coluna].getEstado() == jogadorAdversario)
-                            for (linhaFinal = (linha - 2); linhaFinal >= 0; linhaFinal--)
-                                if (tabuleiro[linhaFinal][coluna].getEstado() == Estado.VAZIO)
-                                    return true;
+                    if (linha > 1) {
+                        if (tabuleiro[linha][coluna].getEstado() == jogadorAtual) {
+                            if (tabuleiro[linha - 1][coluna].getEstado() == jogadorAdversario) {
+                                for (linhaFinal = (linha - 2); linhaFinal >= 0; linhaFinal--) {
+                                    if (tabuleiro[linhaFinal][coluna].getEstado() == Estado.VAZIO) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     //LINHA_BAIXO
-                    if (linha < 6)
-                        if (tabuleiro[linha + 1][coluna].getEstado() == jogadorAdversario)
-                            for (linhaFinal = (linha + 2); linhaFinal < 8; linhaFinal++)
-                                if (tabuleiro[linhaFinal][coluna].getEstado() == Estado.VAZIO)
-                                    return true;
+                    if (linha < 6) {
+                        if (tabuleiro[linha][coluna].getEstado() == jogadorAtual) {
+                            if (tabuleiro[linha + 1][coluna].getEstado() == jogadorAdversario) {
+                                for (linhaFinal = (linha + 2); linhaFinal < 8; linhaFinal++) {
+                                    if (tabuleiro[linhaFinal][coluna].getEstado() == Estado.VAZIO) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     //COLUNA_FRENTE
-                    if (coluna < 6)
-                        if (tabuleiro[linha][coluna + 1].getEstado() == jogadorAdversario)
-                            for (colunaFinal = (coluna + 2); colunaFinal < 8; colunaFinal++)
-                                if (tabuleiro[linha][colunaFinal].getEstado() == Estado.VAZIO)
+                    if (coluna < 6) {
+                        if (tabuleiro[linha][coluna + 1].getEstado() == jogadorAdversario) {
+                            for (colunaFinal = (coluna + 2); colunaFinal < 8; colunaFinal++) {
+                                if (tabuleiro[linha][colunaFinal].getEstado() == Estado.VAZIO) {
                                     return true;
+                                }
+                            }
+                        }
+                    }
 
                     //COLUNA_TRÁS
-                    if (coluna > 1)
-                        if (tabuleiro[linha][coluna - 1].getEstado() == jogadorAdversario)
-                            for (colunaFinal = (coluna - 2); colunaFinal >= 0; colunaFinal--)
-                                if (tabuleiro[linha][colunaFinal].getEstado() == Estado.VAZIO)
-                                    return true;
+                    if (coluna > 1) {
+                        if (tabuleiro[linha][coluna].getEstado() == jogadorAtual) {
+                            if (tabuleiro[linha][coluna - 1].getEstado() == jogadorAdversario) {
+                                for (colunaFinal = (coluna - 2); colunaFinal >= 0; colunaFinal--) {
+                                    if (tabuleiro[linha][colunaFinal].getEstado() == Estado.VAZIO) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     //DIAG_PRIM_FRENTE
-                    if ((coluna < 6) && (linha < 6))
-                        if (tabuleiro[linha + 1][coluna + 1].getEstado() == jogadorAdversario)
-                            for (colunaFinal = (coluna + 2), linhaFinal = (linha + 2); colunaFinal < 8 && linhaFinal < 8; colunaFinal++, linhaFinal++)
-                                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO)
-                                    return true;
-
+                    if ((coluna < 6) && (linha < 6)) {
+                        if (tabuleiro[linha][coluna].getEstado() == jogadorAtual) {
+                            if (tabuleiro[linha + 1][coluna + 1].getEstado() == jogadorAdversario) {
+                                for (colunaFinal = (coluna + 2), linhaFinal = (linha + 2); colunaFinal < 8 && linhaFinal < 8; colunaFinal++, linhaFinal++) {
+                                    if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     //DIAG_PRIM_TRÁS
-                    if ((coluna > 1) && (linha > 1))
-                        if (tabuleiro[linha - 1][coluna - 1].getEstado() == jogadorAdversario)
-                            for (colunaFinal = (coluna - 2), linhaFinal = (linha - 2); colunaFinal >= 0 && linhaFinal >= 0; colunaFinal--, linhaFinal--)
-                                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO)
-                                    return true;
+                    if ((coluna > 1) && (linha > 1)) {
+                        if (tabuleiro[linha][coluna].getEstado() == jogadorAtual) {
+                            if (tabuleiro[linha - 1][coluna - 1].getEstado() == jogadorAdversario) {
+                                for (colunaFinal = (coluna - 2), linhaFinal = (linha - 2); colunaFinal >= 0 && linhaFinal >= 0; colunaFinal--, linhaFinal--) {
+                                    if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     //DIAG_SEC_FRENTE
-                    if ((coluna < 6) && (linha > 1))
-                        if (tabuleiro[linha - 1][coluna + 1].getEstado() == jogadorAdversario)
-                            for (colunaFinal = (coluna + 2), linhaFinal = (linha - 2); colunaFinal < 8 && linhaFinal >= 0; colunaFinal++, linhaFinal--)
-                                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO)
-                                    return true;
-
+                    if ((coluna < 6) && (linha > 1)) {
+                        if (tabuleiro[linha][coluna].getEstado() == jogadorAtual) {
+                            if (tabuleiro[linha - 1][coluna + 1].getEstado() == jogadorAdversario) {
+                                for (colunaFinal = (coluna + 2), linhaFinal = (linha - 2); colunaFinal < 8 && linhaFinal >= 0; colunaFinal++, linhaFinal--) {
+                                    if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     //DIAG_SEC_TRÁS
-                    if ((coluna > 1) && (linha < 6))
-                        if (tabuleiro[linha + 1][coluna - 1].getEstado() == jogadorAdversario)
-                            for (colunaFinal = (coluna - 2), linhaFinal = (linha + 2); colunaFinal >= 0 && linhaFinal < 8; colunaFinal--, linhaFinal++)
-                                if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO)
-                                    return true;
-
-
+                    if ((coluna > 1) && (linha < 6)) {
+                        if (tabuleiro[linha][coluna].getEstado() == jogadorAtual) {
+                            if (tabuleiro[linha + 1][coluna - 1].getEstado() == jogadorAdversario) {
+                                for (colunaFinal = (coluna - 2), linhaFinal = (linha + 2); colunaFinal >= 0 && linhaFinal < 8; colunaFinal--, linhaFinal++) {
+                                    if (tabuleiro[linhaFinal][colunaFinal].getEstado() == Estado.VAZIO) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
+            }
+        }
         return false;
     }
 
@@ -527,13 +594,15 @@ public class Tabuleiro extends JFrame implements ActionListener {
         int preto = 0;
         int branco = 0;
 
-        for (int l = 0; l < 8; l++)
-            for (int c = 0; c < 8; c++)
-                if (tabuleiro[l][c].getEstado() == Estado.PRETO)
+        for (int l = 0; l < 8; l++) {
+            for (int c = 0; c < 8; c++) {
+                if (tabuleiro[l][c].getEstado() == Estado.PRETO) {
                     preto++;
-                else if (tabuleiro[l][c].getEstado() == Estado.BRANCO)
+                } else if (tabuleiro[l][c].getEstado() == Estado.BRANCO) {
                     branco++;
-
+                }
+            }
+        }
 
         if (preto > branco) {
             JOptionPane.showMessageDialog(null, "O jogador PRETO venceu");
@@ -542,9 +611,8 @@ public class Tabuleiro extends JFrame implements ActionListener {
         } else {
             JOptionPane.showMessageDialog(null, "O jogador BRANCO venceu");
             this.branco++;
-            placarBRANCO.setText("PRETO: " + this.branco);
+            placarBRANCO.setText("BRANCO: " + this.branco);
         }
-
 
         reiniciaTabuleiro();
     }
@@ -554,8 +622,12 @@ public class Tabuleiro extends JFrame implements ActionListener {
         for (int l = 0; l < 8; l++) {
             for (int c = 0; c < 8; c++) {
                 tabuleiro[l][c].setEstado(Estado.VAZIO);
-                if (conferirCoord(l, c) == 0) tabuleiro[l][c].setEstado(Estado.PRETO);
-                if (conferirCoord(l, c) == 1) tabuleiro[l][c].setEstado(Estado.BRANCO);
+                if (conferirCoord(l, c) == 0) {
+                    tabuleiro[l][c].setEstado(Estado.PRETO);
+                }
+                if (conferirCoord(l, c) == 1) {
+                    tabuleiro[l][c].setEstado(Estado.BRANCO);
+                }
                 tabuleiro[l][c].repaint();
             }
         }
